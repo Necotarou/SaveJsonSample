@@ -16,15 +16,15 @@ public class UserData {
 
 
 	// データセーブ
-	public string Save(UserData data)
+	public string Save()
 	{
-		string json = JsonUtility.ToJson(data);
+		string json = JsonUtility.ToJson(this);
 
 		return json;
 	}
 
 	// データロード
-	public UserData Load(string json)
+	public static UserData Load(string json)
 	{
 		UserData userData = JsonUtility.FromJson<UserData>(json);
 

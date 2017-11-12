@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class MainSample : MonoBehaviour {
 
-	// データ格納先
-	UserData userData = new UserData();
 
 	protected void Start () {
 
@@ -23,16 +21,19 @@ public class MainSample : MonoBehaviour {
 	// セーブ
 	private void Save()
 	{
+		// データ格納先
+		UserData data = new UserData();
+
 		// サンプルデータ代入
-		userData.Hp = 100;
-		userData.Mp = 200;
-		userData.StringList = new List<string>();
-		userData.StringList.Add("CS");
-		userData.StringList.Add("JavaScript");
-		userData.StringList.Add("Boo");
+		data.Hp = 100;
+		data.Mp = 200;
+		data.StringList = new List<string>();
+		data.StringList.Add("CS");
+		data.StringList.Add("JavaScript");
+		data.StringList.Add("Boo");
 
 		// セーブ
-		string saveJson = userData.Save(userData);
+		string saveJson = data.Save();
 		PlayerPrefs.SetString("Data", saveJson);
 
 		Debug.Log(string.Format("Save {0}", saveJson));
@@ -44,7 +45,7 @@ public class MainSample : MonoBehaviour {
 	{
 		// ロード
 		string json = PlayerPrefs.GetString("Data", string.Empty);
-		UserData loadData = userData.Load(json);
+		UserData userData = UserData.Load(json);
 
 		// データ表示
 		Debug.Log(string.Format("Hp = {0}", userData.Hp));
